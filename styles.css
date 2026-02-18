@@ -77,6 +77,16 @@ body {
   margin-top: 10px;
 }
 
+/* Prompt Box */
+.prompt-box {
+  padding: 20px;
+  margin-bottom: 30px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #4db6ff;
+  min-height: 40px;
+}
+
 /* Cards */
 .cards {
   display: grid;
