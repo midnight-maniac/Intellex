@@ -58,6 +58,47 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    const messages = [
+  "Summarize complex research papers...",
+  "Highlight key insights instantly...",
+  "Generate citations and references...",
+  "Organize your academic library...",
+  "Turn data into clarity with AI..."
+];
+
+let i = 0;
+let j = 0;
+let currentMessage = "";
+let isDeleting = false;
+const speed = 100; // typing speed
+const box = document.getElementById("typewriter");
+
+function type() {
+  if (i < messages.length) {
+    if (!isDeleting && j <= messages[i].length) {
+      currentMessage = messages[i].substring(0, j++);
+      box.textContent = currentMessage;
+    } else if (isDeleting && j >= 0) {
+      currentMessage = messages[i].substring(0, j--);
+      box.textContent = currentMessage;
+    }
+
+    if (j === messages[i].length) {
+      isDeleting = true;
+      setTimeout(type, 1000); // pause before deleting
+      return;
+    } else if (isDeleting && j === 0) {
+      isDeleting = false;
+      i++;
+      if (i === messages.length) i = 0; // loop back
+    }
+  }
+  setTimeout(type, speed);
+}
+
+type();
+
+  </script>
 </body>
 </html>
