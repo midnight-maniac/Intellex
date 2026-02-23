@@ -71,8 +71,9 @@ let i = 0;
 let j = 0;
 let currentMessage = "";
 let isDeleting = false;
-const speed = 569; // typing speed
-const box = document.getElementById("typewriter");
+const typeSpeed   = 60;
+const deleteSpeed = 30;
+const pauseTime   = 1200;
 
 function type() {
   if (i < messages.length) {
@@ -83,18 +84,17 @@ function type() {
       currentMessage = messages[i].substring(0, j--);
       box.textContent = currentMessage;
     }
-
     if (j === messages[i].length) {
       isDeleting = true;
-      setTimeout(type, 1000); // pause before deleting
+      setTimeout(type, pauseTime);
       return;
     } else if (isDeleting && j === 0) {
       isDeleting = false;
       i++;
-      if (i === messages.length) i = 0; // loop back
+      if (i === messages.length) i = 0;
     }
   }
-  setTimeout(type, speed);
+  setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
 }
 
 type();
