@@ -12,12 +12,12 @@
     <h2>Intellex</h2>
     <nav>
       <ul>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Research Library</a></li>
-        <li><a href="#">Summaries</a></li>
-        <li><a href="#">Notes</a></li>
-        <li><a href="#">References</a></li>
-        <li><a href="#">AI Insights</a></li>
+        <li><a href="index.html" class="active">Dashboard</a></li>
+        <li><a href="library.html">Research Library</a></li>
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="insights.html">AI Insights</a></li>
       </ul>
     </nav>
   </aside>
@@ -31,33 +31,33 @@
 
  
     <section class="prompt-box glass">
-      <span id="typewriter">Loading......</span>
+      <span id="typewriter">Loading......</span><span class="cursor">|</span>
     </section>
 
     <section class="cards">
       <div class="card glass">
         <h3>Upload Papers</h3>
         <p>Store and organize your research documents.</p>
-        <button>Upload</button>
+        <button onclick="location.href='library.html'">Upload</button>
       </div>
       <div class="card glass">
         <h3>Summaries</h3>
         <p>AI-generated summaries of complex papers.</p>
-        <button>View</button>
+        <button onclick="location.href='summaries.html'">View</button>
       </div>
       <div class="card glass">
         <h3>Notes</h3>
         <p>Keep track of your thoughts and reflections.</p>
-        <button>Open</button>
+        <button onclick="location.href='notes.html'">Open</button>
       </div>
       <div class="card glass">
         <h3>References</h3>
         <p>Manage citations and bibliographies easily.</p>
-        <button>Manage</button>
+        <button onclick="location.href='references.html'">Manage</button>
       </div>
     </section>
   </main>
-<--Typewriter effect for promt box-->
+<!-- Typewriter effect -->
   <script>
     const messages = [
   "Summarize complex research papers...",
@@ -71,7 +71,7 @@ let i = 0;
 let j = 0;
 let currentMessage = "";
 let isDeleting = false;
-const speed = 169; // typing speed
+const speed = 269; // typing speed
 const box = document.getElementById("typewriter");
 
 function type() {
@@ -98,7 +98,6 @@ function type() {
 }
 
 type();
-
   </script>
 </body>
 </html>

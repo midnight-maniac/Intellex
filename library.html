@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intellex - Research Library</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+  <aside class="sidebar glass">
+    <h2>Intellex</h2>
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="library.html" class="active">Research Library</a></li>
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="insights.html">AI Insights</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header glass">
+      <h1>Research Library</h1>
+      <p>Upload, store, and manage your research documents</p>
+    </header>
+
+    <!-- Upload -->
+    <section class="upload-zone glass" id="uploadZone">
+      <div class="upload-icon">&#8679;</div>
+      <p class="upload-label">Drag &amp; drop files here, or <span class="upload-browse" id="browseBtn">browse</span></p>
+      <p class="upload-sub">Supports PDF, DOCX, TXT &mdash; max 20MB per file</p>
+      <!-- Backend: wire to POST /api/library/upload -->
+      <input type="file" id="fileInput" accept=".pdf,.docx,.txt" multiple hidden>
+    </section>
+
+    <!-- Search + Filter -->
+    <div class="toolbar glass">
+      <input class="toolbar-search" type="text" placeholder="Search library..." id="searchInput">
+      <select class="toolbar-filter" id="filterType">
+        <option value="all">All Types</option>
+        <option value="pdf">PDF</option>
+        <option value="docx">DOCX</option>
+        <option value="txt">TXT</option>
+      </select>
+      <select class="toolbar-filter" id="filterSort">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="az">A &rarr; Z</option>
+      </select>
+    </div>
+
+    <!-- Files -->
+    <section class="file-list" id="fileList">
+      <!-- Sample placeholder entries — backend replaces with real data -->
+      <div class="file-item glass">
+        <div class="file-icon pdf">PDF</div>
+        <div class="file-info">
+          <span class="file-name">Attention Is All You Need.pdf</span>
+          <span class="file-meta">2.4 MB &bull; Uploaded 12 Feb 2026</span>
+        </div>
+        <div class="file-actions">
+          <button class="btn-secondary" title="View Summary" onclick="location.href='summaries.html'">Summary</button>
+          <button class="btn-danger" title="Delete file">Delete</button>
+        </div>
+      </div>
+
+      <div class="file-item glass">
+        <div class="file-icon pdf">PDF</div>
+        <div class="file-info">
+          <span class="file-name">BERT: Pre-training of Deep Bidirectional Transformers.pdf</span>
+          <span class="file-meta">1.8 MB &bull; Uploaded 10 Feb 2026</span>
+        </div>
+        <div class="file-actions">
+          <button class="btn-secondary" onclick="location.href='summaries.html'">Summary</button>
+          <button class="btn-danger">Delete</button>
+        </div>
+      </div>
+
+      <div class="file-item glass">
+        <div class="file-icon docx">DOC</div>
+        <div class="file-info">
+          <span class="file-name">Research Notes - Neural Scaling Laws.docx</span>
+          <span class="file-meta">340 KB &bull; Uploaded 8 Feb 2026</span>
+        </div>
+        <div class="file-actions">
+          <button class="btn-secondary" onclick="location.href='summaries.html'">Summary</button>
+          <button class="btn-danger">Delete</button>
+        </div>
+      </div>
+
+      <div class="file-item glass">
+        <div class="file-icon txt">TXT</div>
+        <div class="file-info">
+          <span class="file-name">reading-list.txt</span>
+          <span class="file-meta">12 KB &bull; Uploaded 5 Feb 2026</span>
+        </div>
+        <div class="file-actions">
+          <button class="btn-secondary" onclick="location.href='summaries.html'">Summary</button>
+          <button class="btn-danger">Delete</button>
+        </div>
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <p>No documents found. Upload your first paper above.</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

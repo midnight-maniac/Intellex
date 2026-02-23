@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intellex - AI Insights</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+  <aside class="sidebar glass">
+    <h2>Intellex</h2>
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="library.html">Research Library</a></li>
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="insights.html" class="active">AI Insights</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header glass">
+      <h1>AI Insights</h1>
+      <p>Ask questions about your research library and get AI-powered answers</p>
+    </header>
+
+    <!-- Query? -->
+    <div class="insight-input-wrap glass">
+      <textarea class="insight-input" id="queryInput" placeholder="Ask anything about your research... e.g. 'What are the common themes across my papers?' or 'Explain the difference between BERT and GPT.'" rows="3"></textarea>
+      <div class="insight-input-footer">
+        <div class="insight-scope">
+          <label for="scopeSelect">Scope:</label>
+          <select id="scopeSelect" class="toolbar-filter">
+            <option value="all">All Library</option>
+            <option value="recent">Last 5 Papers</option>
+            <option value="selected">Selected Papers</option>
+          </select>
+        </div>
+        <!-- Backend: POST /api/insights/query { query, scope } -->
+        <button class="btn-primary" id="askBtn">Ask Intellex</button>
+      </div>
+    </div>
+
+    <!-- Response -->
+    <div class="insight-response glass" id="responseArea" style="display:none;">
+      <div class="insight-response-header">
+        <span class="insight-label">Intellex</span>
+        <button class="btn-secondary copy-insight-btn" id="copyInsightBtn">Copy</button>
+      </div>
+      <div class="insight-response-body" id="responseBody"></div>
+    </div>
+
+    <!-- Previous Insights -->
+    <h2 class="section-title">Previous Insights</h2>
+    <!-- Backend: render from GET /api/insights/history -->
+    <div class="insights-feed" id="insightsFeed">
+
+      <div class="insight-item glass">
+        <div class="insight-item-header">
+          <span class="insight-q-label">Q</span>
+          <p class="insight-question">What are the common themes across my uploaded papers?</p>
+          <span class="insight-date">12 Feb 2026</span>
+        </div>
+        <div class="insight-item-body">
+          <p>Your library primarily covers <strong>transformer architectures</strong> and <strong>large language model training</strong>. Key recurring themes include: self-attention mechanisms, pre-training and fine-tuning paradigms, and empirical scaling behavior. All three papers address how to efficiently learn representations from large corpora without task-specific labeled data during pre-training.</p>
+        </div>
+        <div class="insight-item-footer">
+          <button class="btn-secondary" onclick="location.href='notes.html'">Save as Note</button>
+        </div>
+      </div>
+
+      <div class="insight-item glass">
+        <div class="insight-item-header">
+          <span class="insight-q-label">Q</span>
+          <p class="insight-question">What are the key differences between BERT and the original Transformer?</p>
+          <span class="insight-date">10 Feb 2026</span>
+        </div>
+        <div class="insight-item-body">
+          <p>The original Transformer (Vaswani et al.) is an encoder-decoder model designed for sequence-to-sequence tasks like translation. BERT uses only the encoder stack and is trained with a masked language modeling objective, making it bidirectional by design. BERT is optimized for transfer learning across classification and extraction tasks, while the original Transformer is end-to-end for generation tasks.</p>
+        </div>
+        <div class="insight-item-footer">
+          <button class="btn-secondary" onclick="location.href='notes.html'">Save as Note</button>
+        </div>
+      </div>
+
+      <div class="insight-item glass">
+        <div class="insight-item-header">
+          <span class="insight-q-label">Q</span>
+          <p class="insight-question">Summarize the practical implications of neural scaling laws for my research.</p>
+          <span class="insight-date">8 Feb 2026</span>
+        </div>
+        <div class="insight-item-body">
+          <p>Kaplan et al.'s findings suggest that for a fixed compute budget, training a larger model on proportionally fewer tokens is more efficient than training a smaller model to convergence. This has direct implications for resource planning: if you are fine-tuning or working with limited compute, it may be more effective to start from a larger pre-trained base than to train a smaller model longer. The revised Chinchilla scaling laws further tighten these compute-optimal recommendations.</p>
+        </div>
+        <div class="insight-item-footer">
+          <button class="btn-secondary" onclick="location.href='notes.html'">Save as Note</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const askBtn = document.getElementById('askBtn');
+    const queryInput = document.getElementById('queryInput');
+    const responseArea = document.getElementById('responseArea');
+    const responseBody = document.getElementById('responseBody');
+
+    askBtn.addEventListener('click', () => {
+      const query = queryInput.value.trim();
+      if (!query) return;
+
+      // Show loading state
+      responseArea.style.display = 'block';
+      responseBody.innerHTML = '<span class="loading-dots">Thinking<span>.</span><span>.</span><span>.</span></span>';
+      askBtn.disabled = true;
+      askBtn.textContent = 'Thinking...';
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intellex - Notes</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+  <aside class="sidebar glass">
+    <h2>Intellex</h2>
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="library.html">Research Library</a></li>
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="notes.html" class="active">Notes</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="insights.html">AI Insights</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header glass">
+      <h1>Notes</h1>
+      <p>Capture thoughts, reflections, and ideas from your research</p>
+    </header>
+
+    <div class="notes-layout">
+
+      <!-- Notes List Panel -->
+      <aside class="notes-panel glass">
+        <div class="notes-panel-header">
+          <input type="text" placeholder="Search notes..." id="noteSearch" class="note-search">
+          <button class="btn-primary" id="newNoteBtn">+ New</button>
+        </div>
+        <ul class="notes-list" id="notesList">
+          <!-- Backend: render from GET /api/notes -->
+          <li class="note-list-item active" data-id="1">
+            <span class="note-list-title">Transformer attention intuition</span>
+            <span class="note-list-date">12 Feb 2026</span>
+          </li>
+          <li class="note-list-item" data-id="2">
+            <span class="note-list-title">BERT vs GPT differences</span>
+            <span class="note-list-date">10 Feb 2026</span>
+          </li>
+          <li class="note-list-item" data-id="3">
+            <span class="note-list-title">Scaling law implications for research</span>
+            <span class="note-list-date">8 Feb 2026</span>
+          </li>
+          <li class="note-list-item" data-id="4">
+            <span class="note-list-title">Questions to follow up on</span>
+            <span class="note-list-date">5 Feb 2026</span>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Note Editor Panel -->
+      <div class="note-editor glass">
+        <div class="note-editor-header">
+          <input type="text" class="note-title-input" id="noteTitleInput" value="Transformer attention intuition" placeholder="Note title...">
+          <div class="note-editor-actions">
+            <button class="btn-secondary" id="saveNoteBtn">Save</button>
+            <button class="btn-danger" id="deleteNoteBtn">Delete</button>
+          </div>
+        </div>
+        <div class="note-tag-row">
+          <span class="note-tag">Transformers</span>
+          <span class="note-tag">Attention</span>
+          <span class="note-tag add-tag" id="addTagBtn">+ Tag</span>
+        </div>
+        <!-- Backend: textarea content saved to POST /api/notes/:id -->
+        <textarea class="note-textarea" id="noteTextarea" placeholder="Start writing...">The key insight behind attention is that each token can directly attend to all other tokens regardless of distance. This is fundamentally different from RNNs where information must pass through many timesteps.
+
+Queries, Keys, and Values:
+- Query: what am I looking for?
+- Key: what do I contain?
+- Value: what do I actually pass forward?
+
+The dot product between Q and K gives a compatibility score. After softmax, this becomes a weighted sum over V.
+
+Multi-head attention runs this process h times in parallel with different learned projections — each head can learn to focus on different relationship types (syntactic, semantic, positional etc.)
+
+Follow-up: look into sparse attention patterns in Longformer and BigBird.</textarea>
+        <div class="note-editor-footer">
+          <span class="note-word-count" id="wordCount">0 words</span>
+          <span class="note-saved-status" id="savedStatus">All changes saved</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Word count
+    const textarea = document.getElementById('noteTextarea');
+    const wordCount = document.getElementById('wordCount');
+    const savedStatus = document.getElementById('savedStatus');
+
+    function updateWordCount() {
+      const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+      wordCount.textContent = `${words.length} word${words.length !== 1 ? 's' : ''}`;
+    }
+    updateWordCount();
+
+    let saveTimer;
+    textarea.addEventListener('input', () => {
+      updateWordCount();
+      savedStatus.textContent = 'Unsaved changes...';
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        // Backend: POST /api/notes/:id with content
+        savedStatus.textContent = 'All changes saved';
+      }, 1500);
+    });
+
+    // Note list selection
+    document.querySelectorAll('.note-list-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.note-list-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        // Backend: GET /api/notes/:id and populate editor
+      });
+    });
+
+    
+  </script>
+</body>
+</html>

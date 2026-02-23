@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intellex - References</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+  <aside class="sidebar glass">
+    <h2>Intellex</h2>
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="library.html">Research Library</a></li>
+        <li><a href="summaries.html">Summaries</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="references.html" class="active">References</a></li>
+        <li><a href="insights.html">AI Insights</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header glass">
+      <h1>References</h1>
+      <p>Manage citations and generate formatted bibliographies</p>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar glass">
+      <input class="toolbar-search" type="text" placeholder="Search references..." id="searchInput">
+      <select class="toolbar-filter" id="styleSelect">
+        <option value="apa">APA</option>
+        <option value="mla">MLA</option>
+        <option value="chicago">Chicago</option>
+        <option value="ieee">IEEE</option>
+      </select>
+      <button class="btn-primary" id="addRefBtn">+ Add Reference</button>
+      <button class="btn-secondary" id="exportBtn">Export All</button>
+    </div>
+
+       <div class="ref-list" id="refList">
+
+      <div class="ref-item glass">
+        <div class="ref-body">
+          <p class="ref-citation" id="ref-1-text">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., &amp; Polosukhin, I. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems</em>, 30.</p>
+          <span class="ref-style-badge">APA</span>
+        </div>
+        <div class="ref-actions">
+          <button class="btn-secondary copy-btn" data-ref="ref-1-text">Copy</button>
+          <button class="btn-secondary">Edit</button>
+          <button class="btn-danger">Remove</button>
+        </div>
+      </div>
+
+      <div class="ref-item glass">
+        <div class="ref-body">
+          <p class="ref-citation" id="ref-2-text">Devlin, J., Chang, M.-W., Lee, K., &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>Proceedings of NAACL-HLT 2019</em>, 4171–4186.</p>
+          <span class="ref-style-badge">APA</span>
+        </div>
+        <div class="ref-actions">
+          <button class="btn-secondary copy-btn" data-ref="ref-2-text">Copy</button>
+          <button class="btn-secondary">Edit</button>
+          <button class="btn-danger">Remove</button>
+        </div>
+      </div>
+
+      <div class="ref-item glass">
+        <div class="ref-body">
+          <p class="ref-citation" id="ref-3-text">Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B., Chess, B., Child, R., Gray, S., Radford, A., Wu, J., &amp; Amodei, D. (2020). Scaling laws for neural language models. <em>arXiv preprint arXiv:2001.08361</em>.</p>
+          <span class="ref-style-badge">APA</span>
+        </div>
+        <div class="ref-actions">
+          <button class="btn-secondary copy-btn" data-ref="ref-3-text">Copy</button>
+          <button class="btn-secondary">Edit</button>
+          <button class="btn-danger">Remove</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Adding Reference Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal glass">
+        <h3>Add Reference</h3>
+        <p class="modal-sub">Enter DOI or fill in manually. Backend can auto-fetch metadata from DOI.</p>
+        <!-- Backend: GET /api/references/doi?doi=... to auto-fill -->
+        <div class="modal-doi-row">
+          <input type="text" placeholder="Paste DOI (e.g. 10.1234/example)" id="doiInput" class="modal-input">
+          <button class="btn-primary" id="fetchDoiBtn">Fetch</button>
+        </div>
+        <div class="modal-divider">or fill manually</div>
+        <input type="text" placeholder="Authors" class="modal-input" id="m-authors">
+        <input type="text" placeholder="Year" class="modal-input" id="m-year">
+        <input type="text" placeholder="Title" class="modal-input" id="m-title">
+        <input type="text" placeholder="Journal / Conference" class="modal-input" id="m-journal">
+        <input type="text" placeholder="Volume, Pages, DOI (optional)" class="modal-input" id="m-extra">
+        <div class="modal-footer">
+          <button class="btn-secondary" id="cancelModalBtn">Cancel</button>
+          <button class="btn-primary" id="saveRefBtn">Add Reference</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    
+  </script>
+</body>
+</html>

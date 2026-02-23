@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intellex - Summaries</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+  <aside class="sidebar glass">
+    <h2>Intellex</h2>
+    <nav>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="library.html">Research Library</a></li>
+        <li><a href="summaries.html" class="active">Summaries</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="references.html">References</a></li>
+        <li><a href="insights.html">AI Insights</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header glass">
+      <h1>Summaries</h1>
+      <p>AI-generated summaries of your uploaded research papers</p>
+    </header>
+
+    
+    <div class="toolbar glass">
+      <input class="toolbar-search" type="text" placeholder="Search summaries..." id="searchInput">
+      <select class="toolbar-filter" id="filterSort">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+    </div>
+
+    <div class="summary-list" id="summaryList">
+
+      <div class="summary-card glass">
+        <div class="summary-card-header" onclick="toggleSummary(this)">
+          <div>
+            <h3>Attention Is All You Need</h3>
+            <span class="summary-meta">Vaswani et al. &bull; Summarized 12 Feb 2026</span>
+          </div>
+          <span class="summary-toggle">&#9660;</span>
+        </div>
+        <div class="summary-body">
+          <p class="summary-tldr"><strong>TL;DR:</strong> Introduces the Transformer architecture, replacing recurrence with self-attention for sequence transduction tasks, achieving state-of-the-art results in translation.</p>
+          <ul class="summary-points">
+            <li>Proposes multi-head self-attention as the core mechanism</li>
+            <li>Eliminates recurrent and convolutional layers entirely</li>
+            <li>Achieves 28.4 BLEU on WMT 2014 English-to-German translation</li>
+            <li>Trains significantly faster due to parallelization</li>
+          </ul>
+          <div class="summary-footer">
+            <button class="btn-secondary" onclick="location.href='notes.html'">Add Note</button>
+            <button class="btn-secondary" onclick="location.href='references.html'">Cite</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card glass">
+        <div class="summary-card-header" onclick="toggleSummary(this)">
+          <div>
+            <h3>BERT: Pre-training of Deep Bidirectional Transformers</h3>
+            <span class="summary-meta">Devlin et al. &bull; Summarized 10 Feb 2026</span>
+          </div>
+          <span class="summary-toggle">&#9660;</span>
+        </div>
+        <div class="summary-body">
+          <p class="summary-tldr"><strong>TL;DR:</strong> BERT introduces bidirectional pre-training for language models using masked language modeling and next sentence prediction, enabling fine-tuning on a wide range of NLP tasks.</p>
+          <ul class="summary-points">
+            <li>Bidirectional context — unlike GPT which is left-to-right only</li>
+            <li>Pre-trained on BooksCorpus and English Wikipedia</li>
+            <li>Sets new SOTA on 11 NLP benchmarks including GLUE and SQuAD</li>
+            <li>Fine-tuning requires minimal task-specific architecture changes</li>
+          </ul>
+          <div class="summary-footer">
+            <button class="btn-secondary" onclick="location.href='notes.html'">Add Note</button>
+            <button class="btn-secondary" onclick="location.href='references.html'">Cite</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card glass">
+        <div class="summary-card-header" onclick="toggleSummary(this)">
+          <div>
+            <h3>Research Notes - Neural Scaling Laws</h3>
+            <span class="summary-meta">Kaplan et al. &bull; Summarized 8 Feb 2026</span>
+          </div>
+          <span class="summary-toggle">&#9660;</span>
+        </div>
+        <div class="summary-body">
+          <p class="summary-tldr"><strong>TL;DR:</strong> Empirically demonstrates that language model performance follows predictable power-law scaling with compute, data, and parameter count.</p>
+          <ul class="summary-points">
+            <li>Loss scales as a power law with model size, dataset size, and compute</li>
+            <li>Optimal allocation: larger models trained on fewer tokens outperform smaller models</li>
+            <li>Diminishing returns from increasing only one factor</li>
+            <li>Chinchilla later revised these compute-optimal ratios</li>
+          </ul>
+          <div class="summary-footer">
+            <button class="btn-secondary" onclick="location.href='notes.html'">Add Note</button>
+            <button class="btn-secondary" onclick="location.href='references.html'">Cite</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleSummary(header) {
+      const card = header.closest('.summary-card');
+      const body = card.querySelector('.summary-body');
+      const arrow = header.querySelector('.summary-toggle');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+   
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      document.querySelectorAll('.summary-card').forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(query) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

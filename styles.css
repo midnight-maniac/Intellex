@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -5,7 +9,7 @@
   box-sizing: border-box;
 }
 
-/* Dark Gradient Background */
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   display: flex;
@@ -14,7 +18,7 @@ body {
   color: #e0e0e0;
 }
 
-/* Glass Effect */
+
 .glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
@@ -48,11 +52,17 @@ body {
   color: #e0e0e0;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, border-left 0.2s ease, padding-left 0.2s ease;
 }
 
 .sidebar ul li a:hover {
   color: #4db6ff;
+}
+
+.sidebar ul li a.active {
+  color: #4db6ff;
+  border-left: 3px solid #4db6ff;
+  padding-left: 8px;
 }
 
 /* Main Content */
@@ -85,6 +95,18 @@ body {
   text-align: center;
   color: #eeeeee; 
   min-height: 69px;
+}
+
+.cursor {
+  display: inline-block;
+  color: #4db6ff;
+  font-weight: 100;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 
@@ -128,5 +150,6 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 24px rgba(77, 182, 255, 0.2), 0 2px 8px rgba(0,0,0,0.4);
+  border-color: rgba(77, 182, 255, 0.35);
 }
